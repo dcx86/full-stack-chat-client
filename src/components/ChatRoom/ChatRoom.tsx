@@ -1,10 +1,16 @@
-import React from 'react'
+import React, { Component } from 'react'
 
 import './ChatRoom.css'
 import { ChatContext } from '../../context/ChatContext'
 import { ChatState, ChatMessage } from '../../types/types'
 
-class ChatRoom extends React.Component {
+type OwnProps = {
+  username: string
+}
+
+type Props = OwnProps
+
+class ChatRoom extends Component<Props> {
   static contextType = ChatContext
 
   state: ChatState = {
@@ -34,12 +40,14 @@ class ChatRoom extends React.Component {
   }
 
   render() {
+    const { username } = this.props
+
     const updateInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
       this.setState({ input: e.target.value })
     }
 
     const handleMessage = (): void => {
-      const author: string = 'Ross'
+      const author: string = username
 
       if (this.state.input !== '') {
         this.context.send({

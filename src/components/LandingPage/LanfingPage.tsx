@@ -5,21 +5,27 @@ import { User } from '../../types/types'
 
 type OwnProps = {
   logIn: () => void
+  setUsername: (username: string) => void
 }
 type Props = OwnProps
 
 class LandingPage extends Component<Props> {
-  state: User = {
-    nickname: ''
+  state: Partial<User> = {
+    username: ''
   }
 
   render() {
+    const { username } = this.state
+
     const updateInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
-      this.setState({ nickname: e.target.value })
+      this.setState({ username: e.target.value })
     }
 
-    const { logIn } = this.props
+    const { logIn, setUsername } = this.props
+
     const enterChat = () => {
+      if (!username) return
+      setUsername(username)
       logIn()
     }
 
@@ -29,7 +35,7 @@ class LandingPage extends Component<Props> {
           className="LandingPage-Textarea"
           placeholder="Type your nickname here..."
           onChange={updateInput}
-          value={this.state.nickname}
+          value={this.state.username}
         />
         <p>
           <button onClick={enterChat}>Enter chatroom</button>

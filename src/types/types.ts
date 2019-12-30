@@ -9,9 +9,6 @@ export interface ChatState {
 }
 
 export interface User {
-  nickname: string
-}
-
-export interface Auth {
+  username: string
   loggedIn: boolean
 }
