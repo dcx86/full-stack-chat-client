@@ -1,8 +1,8 @@
 import React from 'react'
-import logo from './logo.svg'
-import './App.css'
-import { ChatContext } from './ChatContext'
-import { ChatState, ChatMessage } from './types'
+import logo from './assets/logo.svg'
+import './styles/App.css'
+import { ChatContext } from './context/ChatContext'
+import { ChatState, ChatMessage } from './types/types'
 
 class App extends React.Component {
   static contextType = ChatContext

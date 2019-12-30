@@ -1,5 +1,5 @@
 import io from 'socket.io-client'
-import { ChatMessage } from './types'
+import { ChatMessage } from '../types/types'
 import { fromEvent, Observable } from 'rxjs'
 
 export class SocketService {

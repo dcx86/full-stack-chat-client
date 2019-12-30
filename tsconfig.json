@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -20,6 +16,9 @@
     "jsx": "react"
   },
   "include": [
-    "src"
+    "src",
+    "__tests__/App.test.tsx",
+    "node_modules/App.test.tsx",
+    "__tests__/setupTests.ts"
   ]
 }
