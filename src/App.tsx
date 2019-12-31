@@ -5,11 +5,8 @@ import './styles/App.css'
 import LandingPage from './components/LandingPage'
 import { ChatRoom } from './components'
 import { User } from './types/types'
-import { ChatContext } from './context/ChatContext'
 
 class App extends React.Component {
-  static contextType = ChatContext
-
   state: User = {
     username: '',
     loggedIn: false

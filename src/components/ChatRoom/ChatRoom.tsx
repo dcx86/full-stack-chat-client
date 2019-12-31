@@ -35,6 +35,10 @@ class ChatRoom extends Component<Props> {
     })
   }
 
+  componentWillUnmount() {
+    this.context.disconnect()
+  }
+
   render() {
     const { username, logOut } = this.props
     const { messages } = this.state
@@ -54,7 +58,7 @@ class ChatRoom extends Component<Props> {
     }
 
     const leaveChat = (): void => {
-      this.context.disconnect()
+      this.context.leaveChat(`${username} has left the chat!`)
       logOut()
     }
 
