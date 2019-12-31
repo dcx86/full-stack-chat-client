@@ -6,6 +6,7 @@ import { ChatState, ChatMessage } from '../../types/types'
 
 type OwnProps = {
   username: string
+  logOut: () => void
 }
 
 type Props = OwnProps
@@ -34,12 +35,8 @@ class ChatRoom extends Component<Props> {
     })
   }
 
-  componentWillUnmount() {
-    this.context.disconnect()
-  }
-
   render() {
-    const { username } = this.props
+    const { username, logOut } = this.props
     const { messages } = this.state
 
     const updateInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -56,10 +53,16 @@ class ChatRoom extends Component<Props> {
       }
     }
 
+    const leaveChat = (): void => {
+      this.context.disconnect()
+      logOut()
+    }
+
     let msgIndex = 0
 
     return (
       <>
+        <button onClick={leaveChat}>Leave chatroom</button>
         <div className="ChatRoom-chatbox">
           {messages.map((m: ChatMessage, index: number) => {
             msgIndex++
@@ -78,13 +81,7 @@ class ChatRoom extends Component<Props> {
           value={this.state.input}
         />
         <p>
-          <button
-            onClick={() => {
-              handleMessage()
-            }}
-          >
-            Send Message
-          </button>
+          <button onClick={handleMessage}>Send Message</button>
         </p>
       </>
     )

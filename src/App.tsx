@@ -15,15 +15,15 @@ class App extends React.Component {
     loggedIn: false
   }
 
-  componentDidMount() {
-    this.context.init()
-  }
-
   render() {
     const { username } = this.state
 
     const logIn = () => {
       this.setState({ loggedIn: true })
+    }
+
+    const logOut = () => {
+      this.setState({ loggedIn: false })
     }
 
     const setUsername = (username: string) => {
@@ -34,7 +34,7 @@ class App extends React.Component {
       <div className="App">
         <img src={logo} className="App-logo" alt="logo" />
         {this.state.loggedIn ? (
-          <ChatRoom username={username} />
+          <ChatRoom username={username} logOut={logOut} />
         ) : (
           <LandingPage setUsername={setUsername} logIn={logIn} />
         )}

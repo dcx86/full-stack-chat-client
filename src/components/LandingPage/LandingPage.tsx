@@ -36,6 +36,7 @@ class LandingPage extends Component<Props> {
     }
 
     const enterChat = () => {
+      this.context.init()
       this.context.join(username, setError, logIn)
       setUsername(username)
     }
