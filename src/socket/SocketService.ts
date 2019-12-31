@@ -18,6 +18,16 @@ export class SocketService {
     return fromEvent(this.socket, 'message')
   }
 
+  public join(username: string, setError: (error: string) => void, logIn: () => void): void {
+    this.socket.emit('join', username, (error: string) => {
+      if (error) {
+        setError(error)
+        return
+      }
+      logIn()
+    })
+  }
+
   public disconnect(): void {
     this.socket.disconnect()
   }

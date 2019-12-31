@@ -1,3 +1,3 @@
-import LandingPage from './LanfingPage'
+import LandingPage from './LandingPage'
 
 export default LandingPage

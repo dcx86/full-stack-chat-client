@@ -1,32 +1,43 @@
 import React, { Component } from 'react'
 
 import './LandingPage.css'
-import { User } from '../../types/types'
+import { ChatContext } from '../../context/ChatContext'
 
 type OwnProps = {
   logIn: () => void
   setUsername: (username: string) => void
 }
+
+type State = {
+  username: string
+  error: string
+}
+
 type Props = OwnProps
 
 class LandingPage extends Component<Props> {
-  state: Partial<User> = {
-    username: ''
+  static contextType = ChatContext
+
+  state: State = {
+    username: '',
+    error: ''
   }
 
   render() {
-    const { username } = this.state
+    const { username, error } = this.state
+    const { logIn, setUsername } = this.props
 
     const updateInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
       this.setState({ username: e.target.value })
     }
 
-    const { logIn, setUsername } = this.props
+    const setError = (error: string) => {
+      this.setState({ error })
+    }
 
     const enterChat = () => {
-      if (!username) return
+      this.context.join(username, setError, logIn)
       setUsername(username)
-      logIn()
     }
 
     return (
@@ -40,6 +51,7 @@ class LandingPage extends Component<Props> {
         <p>
           <button onClick={enterChat}>Enter chatroom</button>
         </p>
+        <p>{error}</p>
       </>
     )
   }

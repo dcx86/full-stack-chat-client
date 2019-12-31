@@ -17,21 +17,20 @@ class ChatRoom extends Component<Props> {
     messages: [
       {
         message: 'Welcome! Type a message and press Send Message to continue the chat.',
-        author: 'Bot'
+        username: 'Bot'
       }
     ],
     input: ''
   }
 
   componentDidMount() {
-    this.context.init()
     const observable = this.context.onMessage()
 
     observable.subscribe((m: ChatMessage) => {
       let messages = this.state.messages
       messages.push(m)
 
-      this.setState({ messages: messages })
+      this.setState({ messages })
     })
   }
 
@@ -41,18 +40,17 @@ class ChatRoom extends Component<Props> {
 
   render() {
     const { username } = this.props
+    const { messages } = this.state
 
     const updateInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
       this.setState({ input: e.target.value })
     }
 
     const handleMessage = (): void => {
-      const author: string = username
-
       if (this.state.input !== '') {
         this.context.send({
           message: this.state.input,
-          author: author
+          username
         })
         this.setState({ input: '' })
       }
@@ -63,12 +61,12 @@ class ChatRoom extends Component<Props> {
     return (
       <>
         <div className="ChatRoom-chatbox">
-          {this.state.messages.map((msg: ChatMessage) => {
+          {messages.map((m: ChatMessage, index: number) => {
             msgIndex++
             return (
-              <div key={msg.author}>
-                <p>{msg.author}</p>
-                <p>{msg.message}</p>
+              <div key={index}>
+                <p>{m.username}</p>
+                <p>{m.message}</p>
               </div>
             )
           })}
