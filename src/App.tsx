@@ -1,26 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
 
-const App: React.FC = () => {
-  return (
-    <div className="App">
-      <header className="App-header">
+import logo from './assets/logo.svg'
+import './styles/App.css'
+import LandingPage from './components/LandingPage'
+import { ChatRoom } from './components'
+import { User } from './types/types'
+
+class App extends React.Component {
+  state: User = {
+    username: '',
+    loggedIn: false
+  }
+
+  render() {
+    const { username } = this.state
+
+    const logIn = () => {
+      this.setState({ loggedIn: true })
+    }
+
+    const logOut = () => {
+      this.setState({ loggedIn: false })
+    }
+
+    const setUsername = (username: string) => {
+      this.setState({ username: username })
+    }
+
+    return (
+      <div className="App">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+        {this.state.loggedIn ? (
+          <ChatRoom username={username} logOut={logOut} />
+        ) : (
+          <LandingPage setUsername={setUsername} logIn={logIn} />
+        )}
+      </div>
+    )
+  }
 }
 
-export default App;
+export default App
