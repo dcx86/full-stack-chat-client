@@ -9,11 +9,12 @@ import { User } from './types/types'
 class App extends React.Component {
   state: User = {
     username: '',
-    loggedIn: false
+    loggedIn: false,
+    error: ''
   }
 
   render() {
-    const { username } = this.state
+    const { username, error } = this.state
 
     const logIn = () => {
       this.setState({ loggedIn: true })
@@ -24,16 +25,20 @@ class App extends React.Component {
     }
 
     const setUsername = (username: string) => {
-      this.setState({ username: username })
+      this.setState({ username })
+    }
+
+    const setError = (error: string) => {
+      this.setState({ error })
     }
 
     return (
       <div className="App">
         <img src={logo} className="App-logo" alt="logo" />
         {this.state.loggedIn ? (
-          <ChatRoom username={username} logOut={logOut} />
+          <ChatRoom username={username} logOut={logOut} setError={setError} />
         ) : (
-          <LandingPage setUsername={setUsername} logIn={logIn} />
+          <LandingPage setUsername={setUsername} logIn={logIn} error={error} setError={setError} />
         )}
       </div>
     )

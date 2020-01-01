@@ -18,6 +18,13 @@ export class SocketService {
     return fromEvent(this.socket, 'message')
   }
 
+  public onDisconnect(logOut: () => void, setError: (error: string) => void): void {
+    this.socket.on('disconnect', () => {
+      logOut()
+      setError('You got disconnected from the server!')
+    })
+  }
+
   public join(username: string, setError: (error: string) => void, logIn: () => void): void {
     this.socket.emit('join', username, (error: string) => {
       if (error) {

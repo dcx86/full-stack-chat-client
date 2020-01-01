@@ -11,4 +11,5 @@ export interface ChatState {
 export interface User {
   username: string
   loggedIn: boolean
+  error: string
 }

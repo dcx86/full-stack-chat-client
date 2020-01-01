@@ -6,11 +6,12 @@ import { ChatContext } from '../../context/ChatContext'
 type OwnProps = {
   logIn: () => void
   setUsername: (username: string) => void
+  setError: (error: string) => void
+  error: string
 }
 
 type State = {
   username: string
-  error: string
 }
 
 type Props = OwnProps
@@ -19,20 +20,15 @@ class LandingPage extends Component<Props> {
   static contextType = ChatContext
 
   state: State = {
-    username: '',
-    error: ''
+    username: ''
   }
 
   render() {
-    const { username, error } = this.state
-    const { logIn, setUsername } = this.props
+    const { username } = this.state
+    const { logIn, setUsername, setError, error } = this.props
 
     const updateInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
       this.setState({ username: e.target.value })
-    }
-
-    const setError = (error: string) => {
-      this.setState({ error })
     }
 
     const enterChat = () => {

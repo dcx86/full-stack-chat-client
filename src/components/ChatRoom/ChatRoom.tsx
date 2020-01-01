@@ -7,6 +7,7 @@ import { ChatState, ChatMessage } from '../../types/types'
 type OwnProps = {
   username: string
   logOut: () => void
+  setError: (error: string) => void
 }
 
 type Props = OwnProps
@@ -33,6 +34,8 @@ class ChatRoom extends Component<Props> {
 
       this.setState({ messages })
     })
+
+    this.context.onDisconnect(this.props.logOut, this.props.setError)
   }
 
   render() {
