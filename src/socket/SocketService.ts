@@ -31,8 +31,4 @@ export class SocketService {
   public leaveChat(m: string): void {
     this.socket.emit('leaveChat', m)
   }
-
-  public disconnect(): void {
-    this.socket.disconnect()
-  }
 }

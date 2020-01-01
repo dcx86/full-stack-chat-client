@@ -35,10 +35,6 @@ class ChatRoom extends Component<Props> {
     })
   }
 
-  componentWillUnmount() {
-    this.context.disconnect()
-  }
-
   render() {
     const { username, logOut } = this.props
     const { messages } = this.state
